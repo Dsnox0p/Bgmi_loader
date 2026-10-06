@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Morphe - Download MicroG</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family: Georgia, "Times New Roman", serif;
+    background:#fff;
+    color:#111;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    height:140px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    background:#fff;
+    border-bottom:1px solid #eee;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    font-family:Arial, sans-serif;
+    font-size:55px;
+    font-weight:400;
+    letter-spacing:-2px;
+}
+
+.logo-m{
+    font-weight:bold;
+    color:#159cc0;
+    margin-right:3px;
+}
+
+.logo-text{
+    color:#080808;
+}
+
+/* Right buttons */
+
+.header-buttons{
+    display:flex;
+    gap:18px;
+}
+
+.icon-btn{
+    width:62px;
+    height:62px;
+    border:0;
+    border-radius:20px;
+    background:#f1f1f1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.icon-btn:active{
+    transform:scale(.94);
+}
+
+.translate{
+    font-family:Arial,sans-serif;
+    font-size:26px;
+}
+
+.sun{
+    font-size:31px;
+}
+
+.menu-icon{
+    font-size:31px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    text-align:center;
+    padding:120px 20px 110px;
+    background:#fff;
+}
+
+.hero h1{
+    font-size:64px;
+    line-height:1.15;
+    margin-bottom:55px;
+    font-weight:bold;
+}
+
+.hero h1 span{
+    color:#168da8;
+}
+
+.description{
+    max-width:700px;
+    margin:auto;
+    font-size:28px;
+    line-height:1.65;
+    color:#555;
+}
+
+.download-btn{
+    margin-top:55px;
+    width:450px;
+    max-width:90%;
+    height:108px;
+    border:none;
+    border-radius:25px;
+    background:linear-gradient(100deg,#187bc1,#11b7a8);
+    color:white;
+    font-family:Georgia,serif;
+    font-size:31px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 15px 30px rgba(0,0,0,.13);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+    transition:.2s;
+}
+
+.download-btn:active{
+    transform:scale(.97);
+}
+
+.download-icon{
+    font-family:Arial,sans-serif;
+    font-size:38px;
+}
+
+/* ================= WHAT IS MICROG ================= */
+
+.what{
+    min-height:520px;
+    background:#eef2fc;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding-top:115px;
+}
+
+.what h2{
+    font-size:58px;
+    text-align:center;
+}
+
+/* ================= SIDE MENU ================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.40);
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:90;
+}
+
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.side-menu{
+    position:fixed;
+    top:0;
+    right:0;
+    width:100%;
+    max-width:720px;
+    height:100vh;
+    background:rgba(255,255,255,.96);
+    border-radius:0 0 0 45px;
+    z-index:100;
+    transform:translateX(100%);
+    transition:.35s ease;
+    padding:30px 35px;
+    box-shadow:-15px 0 40px rgba(0,0,0,.15);
+}
+
+.side-menu.active{
+    transform:translateX(0);
+}
+
+/* menu top */
+
+.menu-top{
+    height:100px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:18px;
+    border-bottom:1px solid #eee;
+}
+
+.menu-close{
+    width:65px;
+    height:65px;
+    border:0;
+    border-radius:20px;
+    background:#eee;
+    font-size:35px;
+    cursor:pointer;
+}
+
+/* menu links */
+
+.menu-links{
+    padding-top:30px;
+}
+
+.menu-item{
+    width:100%;
+    height:100px;
+    display:flex;
+    align-items:center;
+    gap:30px;
+    padding:0 25px;
+    font-size:31px;
+    color:#555;
+    text-decoration:none;
+    cursor:pointer;
+    border-radius:20px;
+}
+
+.menu-item:hover{
+    background:#f4f4f4;
+}
+
+.menu-icon-small{
+    width:45px;
+    text-align:center;
+    font-family:Arial,sans-serif;
+    color:#a0a4ad;
+    font-size:30px;
+}
+
+.menu-divider{
+    height:1px;
+    background:#ddd;
+    margin:20px 0;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark{
+    background:#101114;
+    color:#eee;
+}
+
+body.dark .header,
+body.dark .hero{
+    background:#101114;
+}
+
+body.dark .logo-text{
+    color:#fff;
+}
+
+body.dark .icon-btn{
+    background:#25262a;
+    color:#fff;
+}
+
+body.dark .description{
+    color:#bbb;
+}
+
+body.dark .what{
+    background:#181b23;
+}
+
+body.dark .side-menu{
+    background:#17181c;
+}
+
+body.dark .menu-item{
+    color:#ddd;
+}
+
+body.dark .menu-divider{
+    background:#333;
+}
+
+body.dark .menu-top{
+    border-color:#333;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .header{
+        height:145px;
+        padding:0 28px;
+    }
+
+    .logo{
+        font-size:39px;
+        letter-spacing:-1px;
+    }
+
+    .header-buttons{
+        gap:10px;
+    }
+
+    .icon-btn{
+        width:58px;
+        height:58px;
+        border-radius:19px;
+    }
+
+    /* Screenshot mobile has only translate,
+       theme and menu buttons */
+
+    .hero{
+        padding:110px 25px 90px;
+    }
+
+    .hero h1{
+        font-size:46px;
+        margin-bottom:45px;
+    }
+
+    .description{
+        font-size:24px;
+        line-height:1.65;
+    }
+
+    .download-btn{
+        height:105px;
+        font-size:27px;
+        border-radius:24px;
+    }
+
+    .what{
+        min-height:480px;
+        padding-top:105px;
+    }
+
+    .what h2{
+        font-size:48px;
+    }
+
+    .side-menu{
+        width:100%;
+        padding:20px 28px;
+        border-radius:0 0 0 42px;
+    }
+
+    .menu-item{
+        height:100px;
+        font-size:28px;
+    }
+}
+
+@media(max-width:430px){
+
+    .header{
+        padding:0 18px;
+    }
+
+    .logo{
+        font-size:35px;
+    }
+
+    .header-buttons{
+        gap:7px;
+    }
+
+    .icon-btn{
+        width:54px;
+        height:54px;
+        font-size:25px;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .description{
+        font-size:21px;
+    }
+
+    .download-btn{
+        font-size:24px;
+    }
+
+    .what h2{
+        font-size:42px;
+    }
+
+    .menu-item{
+        font-size:26px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+        <span class="logo-m">M</span>
+        <span class="logo-text">orphe</span>
+    </div>
+
+    <div class="header-buttons">
+
+        <button class="icon-btn translate"
+                onclick="translatePage()">
+            文A
+        </button>
+
+        <button class="icon-btn sun"
+                onclick="toggleDarkMode()">
+            ☼
+        </button>
+
+        <button class="icon-btn menu-icon"
+                onclick="openMenu()">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+    <section class="hero">
+
+        <h1>
+            Download <span>MicroG</span>
+        </h1>
+
+        <div class="description">
+            MicroG is required to use YouTube<br>
+            Morphe and YT Music Morphe
+        </div>
+
+        <button class="download-btn"
+                onclick="downloadMicroG()">
+
+            <span class="download-icon">⇩</span>
+
+            <span>Download MicroG</span>
+
+        </button>
+
+    </section>
+
+
+    <section class="what">
+
+        <h2>What is MicroG?</h2>
+
+    </section>
+
+</main>
+
+
+<!-- ================= DARK OVERLAY ================= -->
+
+<div class="overlay"
+     id="overlay"
+     onclick="closeMenu()">
+</div>
+
+
+<!-- ================= SIDE MENU ================= -->
+
+<div class="side-menu" id="sideMenu">
+
+    <div class="menu-top">
+
+        <button class="icon-btn translate"
+                onclick="translatePage()">
+            文A
+        </button>
+
+        <button class="icon-btn sun"
+                onclick="toggleDarkMode()">
+            ☼
+        </button>
+
+        <button class="menu-close"
+                onclick="closeMenu()">
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="menu-links">
+
+        <a class="menu-item" href="#" onclick="closeMenu()">
+
+            <span class="menu-icon-small">⌂</span>
+
+            <span>Home</span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon-small">♧</span>
+
+            <span>More Apps</span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon-small">▣</span>
+
+            <span>FAQ</span>
+
+        </a>
+
+
+        <div class="menu-divider"></div>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon-small">♡</span>
+
+            <span>Donate</span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon-small">✿</span>
+
+            <span>What's New</span>
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ================= MENU ================= */
+
+function openMenu(){
+
+    document.getElementById("sideMenu")
+        .classList.add("active");
+
+    document.getElementById("overlay")
+        .classList.add("active");
+
+    document.body.style.overflow="hidden";
+}
+
+
+function closeMenu(){
+
+    document.getElementById("sideMenu")
+        .classList.remove("active");
+
+    document.getElementById("overlay")
+        .classList.remove("active");
+
+    document.body.style.overflow="";
+}
+
+
+/* ================= DARK MODE ================= */
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+    }else{
+        localStorage.setItem("theme","light");
+    }
+}
+
+
+/* Save theme */
+
+if(localStorage.getItem("theme")==="dark"){
+    document.body.classList.add("dark");
+}
+
+
+/* ================= DOWNLOAD ================= */
+
+function downloadMicroG(){
+
+    /*
+       Yahan apni MicroG APK ki direct link daalna.
+       Example:
+
+       window.location.href =
+       "https://your-site.com/MicroG.apk";
+    */
+
+    alert("MicroG download link yahan add karo.");
+}
+
+
+/* ================= LANGUAGE ================= */
+
+function translatePage(){
+
+    alert("Language selection");
+}
+
+
+/* ================= ESC KEY ================= */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+        closeMenu();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
